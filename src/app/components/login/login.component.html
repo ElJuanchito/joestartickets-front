@@ -2,3 +2,19 @@
     <h1>Bienvenido a {{title}}</h1>
     <p>Completa los datos para ingresar</p>
 </header>
+<body>
+  <form [formGroup]="loginForm" (ngSubmit)="logIn()" novalidate="">
+
+    <div>
+      <label>email: </label>
+      <input type="email" formControlName="email">
+    </div>
+
+    <div>
+      <label>password: </label>
+      <input type="password" formControlName="password">
+    </div>
+
+    <button type="submit" [disabled]="loginForm.invalid">Ingresar</button>
+  </form>
+</body>
