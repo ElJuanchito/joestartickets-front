@@ -1,48 +1,74 @@
-<form [formGroup]="createEventForm" (ngSubmit)="createEvent()" novalidate="">
-  <div>
-    <label>Nombre: </label>
-    <input type="text" formControlName="name"/>
+<div class="container">
+  <div class="card">
+
+    <div class="card-header p-4">
+      <h5 class="mb-0">
+        <i class="fa-solid fa-calendar-plus me-3"></i> Crear un nuevo evento
+      </h5>
+    </div>
+
+    <div class="card-body">
+      <form class="row g-3" [formGroup]="createEventForm" (ngSubmit)="createEvent()" novalidate="">
+
+        <div class="col-6">
+          <label class="form-label">Nombre: </label>
+          <input class="form-control" type="text" formControlName="name"/>
+        </div>
+
+
+        <div class="col-6">
+          <label class="form-label">Descripción: </label>
+          <textarea class="form-control" formControlName="description"></textarea>
+        </div>
+
+
+        <div class="col-6">
+          <label class="form-label">Tipo: </label>
+          <select formControlName="type" class="form-select">
+            @for (item of eventTypes; track $index){
+              <option value="{{item}}">{{item}}</option>
+            }
+          </select>
+        </div>
+
+        <div class="col-6">
+          <label class="form-label">Fecha: </label>
+          <input class="form-control" type="datetime-local" formControlName="date">
+        </div>
+
+        <div class="col-6">
+          <label class="form-label">Dirección: </label>
+          <input class="form-control" type="text" formControlName="address"/>
+        </div>
+
+
+        <div class="col-6">
+          <label class="form-label">Ciudad: </label>
+          <input class="form-control" type="text" formControlName="city"/>
+        </div>
+
+
+        <div class="col-6">
+          <label class="form-label">Imagen evento: </label>
+          <input class="form-control" type="file" (change)="onFileChange($event, 'coverImg')"/>
+        </div>
+
+
+        <div class="col-6">
+          <label class="form-label">Imagen localidades: </label>
+          <input class="form-control" type="file" (change)="onFileChange($event, 'sectionImg')"/>
+        </div>
+
+        <div class="card-footer p-2">
+          <div class="col-12 text-center">
+            <button class="btn btn-primary" type="submit" [disabled]="createEventForm.invalid">
+              <i class="fa-solid fa-plus me-2"></i>Crear evento
+            </button>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
   </div>
-
-
-  <div>
-    <label>Descripción: </label>
-    <textarea formControlName="description"></textarea>
-  </div>
-
-
-  <div class="col-6">
-    <label class="form-label">Tipo: </label>
-    <select formControlName="type" class="form-select">
-      @for (item of eventTypes; track $index){
-        <option value="{{item}}">{{item}}</option>
-      }
-    </select>
-  </div>
-
-
-  <div>
-    <label>Dirección: </label>
-    <input type="text" formControlName="address"/>
-  </div>
-
-
-  <div>
-    <label>Ciudad: </label>
-    <input type="text" formControlName="city"/>
-  </div>
-
-
-  <div>
-    <label>Imagen evento: </label>
-    <input type="file" (change)="onFileChange($event, 'coverImg')"/>
-  </div>
-
-
-  <div>
-    <label>Imagen localidades: </label>
-    <input type="file" (change)="onFileChange($event, 'sectionImg')"/>
-  </div>
-
-  <button type="submit" [disabled]="createEventForm.invalid">Crear evento</button>
-</form>
+</div>

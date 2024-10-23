@@ -1,20 +1,35 @@
-<header>
-    <h1>Bienvenido a {{title}}</h1>
-    <p>Completa los datos para ingresar</p>
-</header>
-<body>
-  <form [formGroup]="loginForm" (ngSubmit)="logIn()" novalidate="">
-
-    <div>
-      <label>email: </label>
-      <input type="email" formControlName="email">
+<div class="container">
+  <div class="card">
+    <div class="card-header p-4">
+      <h1><i class="fa-solid fa-star me-3"></i>Bienvenido a {{title}}</h1>
+      <p>Completa los datos para ingresar</p>
     </div>
 
-    <div>
-      <label>password: </label>
-      <input type="password" formControlName="password">
-    </div>
+    <div class="card-body">
+      <form class="row g-3" [formGroup]="loginForm" (ngSubmit)="logIn()" novalidate="">
 
-    <button type="submit" [disabled]="loginForm.invalid">Ingresar</button>
-  </form>
-</body>
+        <div class="col-6">
+          <label class="form-label">email: </label>
+          <div class="input-group">
+            <i class="input-group-text fa-duotone fa-solid fa-envelope fs-4"></i>
+            <input type="email" class="form-control" formControlName="email">
+          </div>
+        </div>
+
+        <div class="col-6">
+          <label class="form-label">password: </label>
+          <div class="input-group">
+            <i class="input-group-text fa-duotone fa-solid fa-lock fs-4"></i>
+            <input class="form-control" type="password" formControlName="password">
+          </div>
+        </div>
+
+        <div class="col-12 text-center">
+          <button class="btn btn-primary" type="submit" [disabled]="loginForm.invalid">
+            Ingresar<i class="fa-solid fa-arrow-alt-circle-right ms-2"></i>
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

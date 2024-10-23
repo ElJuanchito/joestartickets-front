@@ -1,12 +1,16 @@
 <div class="container">
+
   <div class="card">
+
     <div class="card-header p-4">
       <h5 class="mb-0">
         <i class="fa-solid fa-user-plus me-3"></i>Registro de un nuevo cliente
       </h5>
     </div>
+
     <div class="card-body p-4">
-<form class="row g-3" [formGroup]="registerForm" (ngSubmit)="register()" novalidate="">
+
+      <form class="row g-3" [formGroup]="registerForm" (ngSubmit)="register()" novalidate="">
     <div class="col-6">
       <label class="form-label">Cédula: </label>
       <input type="text" formControlName="cedula" class="form-control"/>

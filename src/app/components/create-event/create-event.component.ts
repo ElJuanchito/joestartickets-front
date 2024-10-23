@@ -30,6 +30,7 @@ export class CreateEventComponent {
       name: ['', [Validators.required]],
       description: ['', [Validators.required]],
       type: ['', [Validators.required]],
+      date: ['', [Validators.required]],
       address: ['', [Validators.required]],
       city: ['', [Validators.required]],
       sections: this.formBuilder.array([]),

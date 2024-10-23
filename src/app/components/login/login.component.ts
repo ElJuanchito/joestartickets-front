@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-login',
@@ -27,5 +28,6 @@ export class LoginComponent {
 
   public logIn(){
     console.log(this.loginForm.value);
+    Swal.fire("Hola nuevamente!", "Sigue disfrutando de los mejores eventos", "success");
   }
 }
