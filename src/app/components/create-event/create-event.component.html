@@ -11,9 +11,9 @@
   </div>
 
 
-  <div>
-    <label>Tipo: </label>
-    <select formControlName="type">
+  <div class="col-6">
+    <label class="form-label">Tipo: </label>
+    <select formControlName="type" class="form-select">
       @for (item of eventTypes; track $index){
         <option value="{{item}}">{{item}}</option>
       }

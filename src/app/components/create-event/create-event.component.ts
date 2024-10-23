@@ -1,11 +1,16 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
+import {RouterLink} from "@angular/router";
+import {EventsService} from "../../services/events.service";
+import {EventDTO} from "../../dtos/event-dto";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-create-event',
   standalone: true,
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterLink
   ],
   templateUrl: './create-event.component.html',
   styleUrl: './create-event.component.css'
@@ -15,7 +20,7 @@ export class CreateEventComponent {
   eventTypes: string[];
   createEventForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private eventService: EventsService) {
     this.createForm();
     this.eventTypes = ['SPORTS', 'CONCERT', 'CULTURAL', 'FASHION', 'BEAUTY']; //TODO Cambiar la lista quemada por valores obtenidos del backend
   }
@@ -35,6 +40,9 @@ export class CreateEventComponent {
 
   public createEvent() {
     console.log(this.createEventForm.value);
+
+    this.eventService.create(this.createEventForm.value as EventDTO);
+    Swal.fire("Exito!", "Se ha creado un nuevo evento.", "success");
   }
 
   //TODO Este metodo deberia cargar la imagen a firebase

@@ -1,15 +1,17 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import {RouterLink, RouterOutlet} from '@angular/router';
 import { RouterModule } from '@angular/router';
+import {NgOptimizedImage} from "@angular/common";
+import {routes} from "./app.routes";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterModule],
+  imports: [RouterOutlet, RouterModule, NgOptimizedImage],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'joestartickets';
-  footer = 'Universidad del Quindío - 2024-2';
+  protected readonly routes = routes;
+  protected readonly onclick = onclick;
 }

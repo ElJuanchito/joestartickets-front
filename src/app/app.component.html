@@ -1,13 +1,2 @@
-<header>
-  <p>Página inicial de {{ title }}</p>
-  <ul>
-    <li><a routerLink="">Inicio</a></li>
-    <li><a routerLink="/login">Login</a></li>
-    <li><a routerLink="/register">Registro</a></li>
-    <li><a routerLink="/events/create-event">Create event</a></li>
- </ul>
- </header>
- <router-outlet></router-outlet>
- <footer>
-  <p>{{footer}}</p>
- </footer>
+<li><a routerLink="events/manage-event" class="nav-link px-2">Gestión de eventos</a></li>
+<router-outlet></router-outlet>
