@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import {EventDTO} from "../dtos/event-dto";
+import {EventDTO} from "../../dtos/event-dto";
 
 @Injectable({
   providedIn: 'root'
 })
-export class EventsService {
+export class EventService {
 
   events: EventDTO [];
 
@@ -43,7 +43,7 @@ export class EventsService {
       name:'Evento 1',
       description:'Descripcion del evento 1',
       date:new Date("2021-09-01 20:00:00"),
-      type:'Concierto',
+      type:'CONCERT',
       address:'Calle 123',
       city:'Bogota',
       sections:[
@@ -68,7 +68,7 @@ export class EventsService {
       name:'Evento 2',
       description:'Descripcion del evento 2',
       date:new Date(),
-      type:'Teatro',
+      type:'SPORTS',
       address:'Calle 123',
       city:'Bogota',
       sections:[],
@@ -82,7 +82,7 @@ export class EventsService {
       name:'Evento 3',
       description:'Descripcion del evento 3',
       date:new Date(),
-      type:'Deportivo',
+      type:'SPORTS',
       address:'Calle 123',
       city:'Bogota',
       sections:[],

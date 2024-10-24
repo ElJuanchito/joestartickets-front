@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {EventDTO} from "../../dtos/event-dto";
-import {EventsService} from "../../services/events.service";
+import {EventService} from "../../services/event/event.service";
 import {ActivatedRoute} from "@angular/router";
 import {CommonModule} from "@angular/common";
 
@@ -18,7 +18,7 @@ export class EventDetailComponent {
   eventId: string = '';
   event: EventDTO | undefined;
 
-  constructor(private route: ActivatedRoute, private eventService: EventsService) {
+  constructor(private route: ActivatedRoute, private eventService: EventService) {
     this.route.params.subscribe(params => {
       this.eventId = params['id'];
       this.getEvents();

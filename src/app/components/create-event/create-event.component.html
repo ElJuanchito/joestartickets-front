@@ -3,12 +3,13 @@
 
     <div class="card-header p-4">
       <h5 class="mb-0">
-        <i class="fa-solid fa-calendar-plus me-3"></i> Crear un nuevo evento
+        @if (isUpdate){<i class="fa-solid fa-calendar-alt me-3"></i> Acutizar evento}
+        @else {<i class="fa-solid fa-calendar-plus me-3"></i> Crear un nuevo evento}
       </h5>
     </div>
 
     <div class="card-body">
-      <form class="row g-3" [formGroup]="createEventForm" (ngSubmit)="createEvent()" novalidate="">
+      <form class="row g-3" [formGroup]="createEventForm" (ngSubmit)="this.isUpdate ? updateEvent() : createEvent()" novalidate="">
 
         <div class="col-6">
           <label class="form-label">Nombre: </label>
@@ -59,10 +60,23 @@
           <input class="form-control" type="file" (change)="onFileChange($event, 'sectionImg')"/>
         </div>
 
+        @if (isUpdate){
+          <div class="col-6">
+            <label class="form-label">Imagen actual de evento: </label>
+            <img class="img-fluid" ngSrc="{{eventExists?.coverImg}}" alt="" width="100" height="100">
+          </div>
+
+          <div class="col-6">
+            <label class="form-label">Imagen actual de localidades: </label>
+            <img class="img-fluid" ngSrc="{{eventExists?.sectionImg}}" alt="" width="100" height="100">
+          </div>
+        }
+
         <div class="card-footer p-2">
           <div class="col-12 text-center">
             <button class="btn btn-primary" type="submit" [disabled]="createEventForm.invalid">
-              <i class="fa-solid fa-plus me-2"></i>Crear evento
+              @if (isUpdate) {<i class="fa-solid fa-edit me-2"></i>Actualizar evento}
+              @else {<i class="fa-solid fa-plus me-2"></i>Crear evento}
             </button>
           </div>
         </div>

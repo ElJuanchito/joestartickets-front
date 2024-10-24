@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {EventDTO} from "../../dtos/event-dto";
-import {EventsService} from "../../services/events.service";
+import {EventService} from "../../services/event/event.service";
 import {RouterLink} from "@angular/router";
 import Swal from 'sweetalert2';
 
@@ -18,7 +18,7 @@ export class EventManagmentComponent {
   matches: EventDTO[];
   btnDeleteText: string;
 
-  constructor(public eventService:EventsService) {
+  constructor(public eventService:EventService) {
     this.events = eventService.getAll();
     this.matches = [];
     this.btnDeleteText = '';
