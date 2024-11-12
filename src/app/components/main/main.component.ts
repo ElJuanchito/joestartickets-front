@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {NgOptimizedImage} from "@angular/common";
 import {RouterLink, RouterOutlet, ɵEmptyOutletComponent} from "@angular/router";
-import {EventCardComponent} from "../event-card/event-card.component";
+import { EventCardComponent } from '../event-card/event-card.component';
 
 @Component({
   selector: 'app-main',
@@ -12,7 +12,7 @@ import {EventCardComponent} from "../event-card/event-card.component";
     RouterOutlet,
     EventCardComponent,
     ɵEmptyOutletComponent
-  ],
+],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })
