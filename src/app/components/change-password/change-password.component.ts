@@ -42,4 +42,9 @@ export class ChangePasswordComponent {
     return password == confirmPassword ? null : { passwordsMismatch: true }
   }
 
+  toUpperCase() {
+    const currentValue = this.recoverPasswordForm.get('code')?.value;
+    this.recoverPasswordForm.get('code')?.setValue(currentValue.toUpperCase());
+  }
+
 }

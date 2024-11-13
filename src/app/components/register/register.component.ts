@@ -1,10 +1,13 @@
 import { Component } from '@angular/core';
 import { AbstractControlOptions, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [
+    ReactiveFormsModule
+  ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -12,7 +15,7 @@ export class RegisterComponent {
 
   registerForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private router: Router) {
     this.createForm();
   }
 
@@ -39,5 +42,7 @@ export class RegisterComponent {
 
   public register(){
     console.log(this.registerForm.value);
+    this.router.navigate(['auth/activate-account/:id']);
+    //TODO Modificar el id por algo el id de la cuenta recien creada en el backend
   }
 }
