@@ -1,0 +1,51 @@
+<div class="container">
+    
+    <div class="card">
+        
+        <div class="card-header">
+            <h5><i class="fa fa-solid fa-user"></i>Editar perfil del usuario</h5>
+        </div>
+
+        <div class="card-body">
+            Completa los campos que desees actualizar
+
+            <form class="row g-3" [formGroup]="updateForm" (ngSubmit)="updateAccount()" novalidate="">
+
+                <div class="col-6">
+                    <label class="form-label">Email:</label>
+                    <input class="form-control" type="text" formControlName="email" [contentEditable]="false">
+                </div>
+
+                <div class="col-6">
+                    <label class="form-label">Cedula:</label>
+                    <input class="form-control" type="text" formControlName="cedula" [contentEditable]="false">
+                </div>
+
+                <div class="col-6">
+                  <label class="form-label">Nombre:</label>
+                  <input class="form-control" type="text" aria-describedby="helpId" formControlName="name">
+                  <small id="helpId" class="text-muted">Help text</small>
+                </div>
+
+                <div class="col-6">
+                    <label class="form-label">Telefono:</label>
+                    <input class="form-control" type="number" formControlName="phone">
+                </div>
+
+                <div class="col-6">
+                    <label class="form-label">Direccion:</label>
+                    <input class="form-control" type="text" formControlName="address">
+                </div>
+
+                <div class="card-footer">
+                    <div class="col-12">
+                        <button class="btn btn-primary" type="submit" [disabled]="updateAccountForm.invalid">
+                            Continuar <i class="fa fa-solid fa-arrow-circle-right"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

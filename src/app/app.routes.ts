@@ -7,6 +7,7 @@ import {EventManagmentComponent} from "./components/event-managment/event-managm
 import {EventDetailComponent} from "./components/event-detail/event-detail.component";
 import {ChangePasswordComponent} from "./components/change-password/change-password.component";
 import { ActivateAccountComponent } from './components/activate-account/activate-account.component';
+import { EditAccountComponent } from './components/edit-account/edit-account.component';
 
 export const routes: Routes = [
     { path: '', component: MainComponent },
@@ -18,6 +19,7 @@ export const routes: Routes = [
     { path: 'events/update-event/:id', component: CreateEventComponent },
     { path: 'auth/recover-password', component: ChangePasswordComponent },
     { path: 'auth/activate-account/:id', component: ActivateAccountComponent },
+    { path: 'account/edit-account/:id', component: EditAccountComponent},
     { path: '**', pathMatch: 'full', redirectTo: '' }
 
 ];

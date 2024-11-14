@@ -23,6 +23,7 @@ export class ActivateAccountComponent {
       this.accountId = params['id'];
     });
 
+
   }
 
   activateAccount() {

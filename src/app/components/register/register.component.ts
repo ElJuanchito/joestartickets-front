@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AbstractControlOptions, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -43,6 +44,7 @@ export class RegisterComponent {
   public register(){
     console.log(this.registerForm.value);
     this.router.navigate(['auth/activate-account/:id']);
+    Swal.fire("Bienvenido!", "disfruta de los mejores eventos", "success"); 
     //TODO Modificar el id por algo el id de la cuenta recien creada en el backend
   }
 }
