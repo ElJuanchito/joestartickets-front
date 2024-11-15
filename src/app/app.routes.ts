@@ -18,7 +18,7 @@ export const routes: Routes = [
     { path: 'events/detail-event/:id', component: EventDetailComponent },
     { path: 'events/update-event/:id', component: CreateEventComponent },
     { path: 'auth/recover-password', component: ChangePasswordComponent },
-    { path: 'auth/activate-account/:id', component: ActivateAccountComponent },
+    { path: 'auth/activate-account', component: ActivateAccountComponent },
     { path: 'account/edit-account/:id', component: EditAccountComponent},
     { path: '**', pathMatch: 'full', redirectTo: '' }
 

@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import { RouterLink } from '@angular/router';
 import Swal from "sweetalert2";
+import { AuthService } from '../../services/auth/auth.service';
+import { LoginDTO } from '../../dtos/account/login-dto';
+import { TokenService } from '../../services/token/token.service';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +20,7 @@ export class LoginComponent {
   title ='JoestarTickets';
   loginForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private tokenService: TokenService) {
     this.createForm();
   }
 
@@ -29,7 +32,20 @@ export class LoginComponent {
   }
 
   public logIn(){
-    console.log(this.loginForm.value);
-    Swal.fire("Hola nuevamente!", "Sigue disfrutando de los mejores eventos", "success");
+
+    const loginDTO = this.loginForm.value as LoginDTO;
+
+    this.authService.login(loginDTO).subscribe({
+      next: (data) => {
+        this.tokenService.login(data.response.token);
+      },
+      error: (error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: error.error.response
+        });
+      }   
+    });
   }
 }

@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { AbstractControlOptions, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { AuthService } from '../../services/auth/auth.service';
+import { CreateAccountDTO } from '../../dtos/account/create-account-dto';
 
 @Component({
   selector: 'app-register',
@@ -16,17 +18,17 @@ export class RegisterComponent {
 
   registerForm!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private authService: AuthService) {
     this.createForm();
   }
 
   private createForm() {
     this.registerForm = this.formBuilder.group({
       cedula: ['', [Validators.required]],
-      nombre: ['', [Validators.required]],
+      name: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      direccion: ['', [Validators.required]],
-      telefono: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
+      address: ['', [Validators.required]],
+      phone: ['', [Validators.required, Validators.maxLength(10), Validators.minLength(10)]],
       password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(18)]],
       confirmPassword: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(18)]]
     },
@@ -42,9 +44,26 @@ export class RegisterComponent {
   }
 
   public register(){
-    console.log(this.registerForm.value);
-    this.router.navigate(['auth/activate-account/:id']);
-    Swal.fire("Bienvenido!", "disfruta de los mejores eventos", "success"); 
-    //TODO Modificar el id por algo el id de la cuenta recien creada en el backend
+
+    const accountDTO = this.registerForm.value as CreateAccountDTO;
+    this.authService.createAccount(accountDTO).subscribe({
+      next: (data)=> {
+        Swal.fire({
+          title: 'Cuenta creada',
+          text: 'La cuenta se ha creado correctamente',
+          icon: 'success',
+          confirmButtonText: 'Aceptar'
+        });
+        this.router.navigate(['auth/activate-account']);
+      },
+      error: (error) => {
+        Swal.fire({
+          title: 'Error',
+          text: error.error.response,
+          icon: 'error',
+          confirmButtonText: 'Aceptar'
+        })
+      }
+    });
   }
 }

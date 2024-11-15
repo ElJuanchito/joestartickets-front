@@ -21,7 +21,7 @@ export class EditAccountComponent {
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, public accountService: AccountService) {
     this.route.params.subscribe(params => {
       this.accountId = params['id'];
-      this.accountInfoDTO = accountService.getAccountById(this.accountId);
+      //this.accountInfoDTO = accountService.getAccountById(this.accountId);
     });
     this.createForm();
   }

@@ -13,7 +13,6 @@ import { CreateEventDTO } from '../../dtos/event/create-event-dto';
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    RouterLink,
     NgOptimizedImage
   ],
   templateUrl: './create-event.component.html',
@@ -58,14 +57,14 @@ export class CreateEventComponent {
 
   //TODO Revisar
   public updateEvent(){
-    this.eventService.update(this.eventId as string, this.createEventForm.value as UpdateEventDTO);
-    Swal.fire("Exito!", "Evento modificado correctamente", "success");
+    // this.eventService.update(this.eventId as string, this.createEventForm.value as UpdateEventDTO);
+    // Swal.fire("Exito!", "Evento modificado correctamente", "success");
   }
 
   //TODO Revisar
   public createEvent() {
-    this.eventService.create(this.createEventForm.value as CreateEventDTO);
-    Swal.fire("Exito!", "Se ha creado un nuevo evento.", "success");
+    // this.eventService.create(this.createEventForm.value as CreateEventDTO);
+    // Swal.fire("Exito!", "Se ha creado un nuevo evento.", "success");
   }
 
   //TODO Este metodo deberia cargar la imagen a firebase

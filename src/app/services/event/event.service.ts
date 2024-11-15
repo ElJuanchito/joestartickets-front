@@ -1,27 +1,28 @@
 import { Injectable } from '@angular/core';
-import {EventDTO} from "../../dtos/event-dto";
+import { EventInfoDTO } from '../../dtos/event/event-info-dto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
 
-  events: EventDTO [];
+  events: EventInfoDTO [];
 
   constructor() {
     this.events = [];
     this.createTestEvents();
   }
 
+
   public getAll(){
     return this.events;
   }
 
-  public create(createEventDTO: EventDTO){
+  public create(createEventDTO: EventInfoDTO){
     this.events.push(createEventDTO);
   }
 
-  public get(id: string):EventDTO | undefined{
+  public get(id: string):EventInfoDTO | undefined{
     return this.events.find((e) => e.id == id);
   }
 
@@ -29,7 +30,7 @@ export class EventService {
     this.events = this.events.filter((e) => e.id != id);
   }
 
-  public update(id:string, updateEventDTO:EventDTO){
+  public update(id:string, updateEventDTO:EventInfoDTO){
     const indice = this.events.findIndex(e => e.id == id);
     if(indice != -1){
       this.events[indice] = updateEventDTO;
@@ -50,12 +51,14 @@ export class EventService {
         {
           name:'Localidad 1',
           price:10000,
-          maxCapacity:100
+          maxCapacity:100,
+          ticketsSold: 1
         },
         {
           name:'Localidad 2',
           price:20000,
-          maxCapacity:100
+          maxCapacity:100,
+          ticketsSold:2,
         }
       ],
       coverImg:'https://picsum.photos/100?random=1',

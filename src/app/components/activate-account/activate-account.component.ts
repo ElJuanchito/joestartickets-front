@@ -18,11 +18,7 @@ export class ActivateAccountComponent {
   code: string = '';
 
 
-  constructor(private route: ActivatedRoute, private router: Router) {
-    this.route.params.subscribe(params => {
-      this.accountId = params['id'];
-    });
-
+  constructor(private router: Router) {
 
   }
 
