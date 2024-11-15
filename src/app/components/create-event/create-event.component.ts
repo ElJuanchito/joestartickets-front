@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {ActivatedRoute, RouterLink} from "@angular/router";
 import {EventService} from "../../services/event/event.service";
-import {EventDTO} from "../../dtos/event-dto";
+import {EventInfoDTO} from "../../dtos/event/event-info-dto";
 import Swal from "sweetalert2";
 import {formatDate, NgOptimizedImage} from "@angular/common";
+import { UpdateEventDTO } from '../../dtos/event/update-event-dto';
+import { CreateEventDTO } from '../../dtos/event/create-event-dto';
 
 @Component({
   selector: 'app-create-event',
@@ -22,7 +24,7 @@ export class CreateEventComponent {
   eventTypes: string[];
   createEventForm!: FormGroup;
   eventId: string | undefined;
-  eventExists: EventDTO | undefined;
+  eventExists: EventInfoDTO | undefined;
   isUpdate: boolean = false;
 
   constructor(private route: ActivatedRoute, private formBuilder: FormBuilder, private eventService: EventService) {
@@ -54,13 +56,15 @@ export class CreateEventComponent {
     console.log(this.createEventForm.value);
   }
 
+  //TODO Revisar
   public updateEvent(){
-    this.eventService.update(this.eventId as string, this.createEventForm.value as EventDTO);
+    this.eventService.update(this.eventId as string, this.createEventForm.value as UpdateEventDTO);
     Swal.fire("Exito!", "Evento modificado correctamente", "success");
   }
 
+  //TODO Revisar
   public createEvent() {
-    this.eventService.create(this.createEventForm.value as EventDTO);
+    this.eventService.create(this.createEventForm.value as CreateEventDTO);
     Swal.fire("Exito!", "Se ha creado un nuevo evento.", "success");
   }
 

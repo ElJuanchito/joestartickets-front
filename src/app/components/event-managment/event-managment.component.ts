@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {EventDTO} from "../../dtos/event-dto";
+import {EventInfoDTO} from "../../dtos/event/event-info-dto";
 import {EventService} from "../../services/event/event.service";
 import {RouterLink} from "@angular/router";
 import Swal from 'sweetalert2';
@@ -14,8 +14,8 @@ import Swal from 'sweetalert2';
   styleUrl: './event-managment.component.css'
 })
 export class EventManagmentComponent {
-  events: EventDTO[];
-  matches: EventDTO[];
+  events: EventInfoDTO[];
+  matches: EventInfoDTO[];
   btnDeleteText: string;
 
   constructor(public eventService:EventService) {
@@ -24,7 +24,7 @@ export class EventManagmentComponent {
     this.btnDeleteText = '';
   }
 
-  public select(event: EventDTO, status:boolean){
+  public select(event: EventInfoDTO, status:boolean){
 
     if(status) this.matches.push(event);
     else this.matches.splice(this.matches.indexOf(event), 1);

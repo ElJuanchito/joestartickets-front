@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { AccountInfoDTO } from '../../dtos/account-info-dto';
+import { AccountInfoDTO } from '../../dtos/account/account-info-dto';
 import { AccountService } from '../../services/account/account.service';
 import Swal from 'sweetalert2';
 
@@ -16,7 +16,7 @@ export class EditAccountComponent {
 
   updateForm!: FormGroup;
   accountId:string = '';
-  accountInfoDTO: AccountInfoDTO;
+  accountInfoDTO!: AccountInfoDTO;
 
   constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, public accountService: AccountService) {
     this.route.params.subscribe(params => {

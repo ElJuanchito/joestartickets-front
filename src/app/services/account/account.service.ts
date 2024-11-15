@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AccountInfoDTO } from '../../dtos/account-info-dto';
+import { AccountInfoDTO } from '../../dtos/account/account-info-dto';
 
 @Injectable({
   providedIn: 'root'
