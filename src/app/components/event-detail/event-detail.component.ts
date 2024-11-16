@@ -21,12 +21,18 @@ export class EventDetailComponent {
   constructor(private route: ActivatedRoute, private eventService: EventService) {
     this.route.params.subscribe(params => {
       this.eventId = params['id'];
-      this.getEvents();
+      this.getEvent(this.eventId);
     });
   }
 
-  public getEvents() {
-    const eventFinded = this.eventService.get(this.eventId);
-    if(eventFinded != undefined) this.event = eventFinded;
+  getEvent(id: string) {
+    this.eventService.get(id).subscribe({
+      next: (data) => {
+        this.event = data.response;
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
   }
 }
