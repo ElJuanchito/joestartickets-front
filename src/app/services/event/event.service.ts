@@ -1,98 +1,46 @@
 import { Injectable } from '@angular/core';
 import { EventInfoDTO } from '../../dtos/event/event-info-dto';
+import { HttpClient } from '@angular/common/http';
+import { MessageDTO } from '../../dtos/other/message-dto';
+import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
+import { FilterEventDTO } from '../../dtos/event/filter-event-dto';
+import { UpdateEventDTO } from '../../dtos/event/update-event-dto';
+import { CreateEventDTO } from '../../dtos/event/create-event-dto';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EventService {
 
-  events: EventInfoDTO [];
+  private eventURL = environment._EventUrl;
+  private adminURL = environment._AccountUrl;
 
-  constructor() {
-    this.events = [];
-    this.createTestEvents();
+  constructor(private http: HttpClient) {
   }
 
 
-  public getAll(){
-    return this.events;
+  public getAll(): Observable<MessageDTO> {
+    return this.http.get<MessageDTO>(`${this.eventURL}/get/all-events`);
   }
 
-  public create(createEventDTO: EventInfoDTO){
-    this.events.push(createEventDTO);
+  public create(createEventDTO: CreateEventDTO): Observable<MessageDTO> {
+    return this.http.post<MessageDTO>(`${this.adminURL}/events/create-event`, createEventDTO);
   }
 
-  public get(id: string):EventInfoDTO | undefined{
-    return this.events.find((e) => e.id == id);
+  public get(id: string): Observable<MessageDTO> {
+    return this.http.get<MessageDTO>(`${this.eventURL}/get/event/${id}`);
   }
 
-  public delete(id: string) {
-    this.events = this.events.filter((e) => e.id != id);
+  public filterEvents(filter: FilterEventDTO): Observable<MessageDTO> {
+    return this.http.post<MessageDTO>(`${this.eventURL}/get/filter-events`,filter);
   }
 
-  public update(id:string, updateEventDTO:EventInfoDTO){
-    const indice = this.events.findIndex(e => e.id == id);
-    if(indice != -1){
-      this.events[indice] = updateEventDTO;
-    }
+  public delete(id: string): Observable<MessageDTO> {
+    return this.http.delete<MessageDTO>(`${this.adminURL}/events/delete-event/${id}`);
   }
 
-
-  public createTestEvents() {
-    this.events.push({
-      id:'1',
-      name:'Evento 1',
-      description:'Descripcion del evento 1',
-      date:new Date("2021-09-01 20:00:00"),
-      type:'CONCERT',
-      address:'Calle 123',
-      city:'Bogota',
-      sections:[
-        {
-          name:'Localidad 1',
-          price:10000,
-          maxCapacity:100,
-          ticketsSold: 1
-        },
-        {
-          name:'Localidad 2',
-          price:20000,
-          maxCapacity:100,
-          ticketsSold:2,
-        }
-      ],
-      coverImg:'https://picsum.photos/100?random=1',
-      sectionImg:'https://picsum.photos/100',
-      status:'Activo'
-    });
-
-    this.events.push({
-      id:'2',
-      name:'Evento 2',
-      description:'Descripcion del evento 2',
-      date:new Date(),
-      type:'SPORTS',
-      address:'Calle 123',
-      city:'Bogota',
-      sections:[],
-      coverImg:'https://picsum.photos/100?random=2',
-      sectionImg:'https://picsum.photos/100',
-      status:'Activo'
-    });
-
-    this.events.push({
-      id:'3',
-      name:'Evento 3',
-      description:'Descripcion del evento 3',
-      date:new Date(),
-      type:'SPORTS',
-      address:'Calle 123',
-      city:'Bogota',
-      sections:[],
-      coverImg:'https://picsum.photos/100?random=3',
-      sectionImg:'https://picsum.photos/100',
-      status:'Activo'
-    });
-
+  public update(updateEventDTO:UpdateEventDTO): Observable<MessageDTO>{
+    return this.http.put<MessageDTO>(`${this.adminURL}/events/update-event`, updateEventDTO);
   }
 }

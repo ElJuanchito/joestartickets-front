@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { MessageDTO } from '../../dtos/other/message-dto';
 import { Observable } from 'rxjs';
+import { EventInfoDTO } from '../../dtos/event/event-info-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,8 @@ export class PublicService {
   private publicURL = environment._PublicUrl;
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { 
+  }
 
 
   public getTypes(): Observable<MessageDTO> {

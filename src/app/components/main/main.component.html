@@ -17,8 +17,17 @@
 <div>
   <div class="container">
     <div class="row">
-      @for (item of [1,2,3,4,5,6]; track item){
-        <div class="col"><app-event-card></app-event-card></div>
+      @for (event of events; track $index){
+        <div class="card" style="width: 18rem;">
+          <img src="{{event.coverImg}}" class="card-img-top" alt="event img">
+          <div class="card-body">
+            <h5 class="card-title">{{event.name}}</h5>
+            <p class="card-text">{{event.description}}</p>
+          </div>
+          <div class="card-body">
+            <a routerLink="/events/detail-event/{{event.id}}" class="card-link">Ver detalle</a>
+          </div>
+        </div>
       }
     </div>
 

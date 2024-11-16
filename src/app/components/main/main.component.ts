@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {NgOptimizedImage} from "@angular/common";
 import {RouterLink, RouterOutlet, ɵEmptyOutletComponent} from "@angular/router";
 import { EventCardComponent } from '../event-card/event-card.component';
+import { PublicService } from '../../services/public/public.service';
+import { EventInfoDTO } from '../../dtos/event/event-info-dto';
 
 @Component({
   selector: 'app-main',
@@ -19,9 +21,36 @@ import { EventCardComponent } from '../event-card/event-card.component';
 export class MainComponent {
   title = 'joestartickets';
   footer = 'Universidad del Quindío - 2024-2';
-  eventTypes : string[];
+  eventTypes : string[] = [];
+  events: EventInfoDTO[] = [];
 
-  constructor() {
-    this.eventTypes = ['SPORTS', 'CONCERT', 'CULTURAL', 'FASHION', 'BEAUTY']; //TODO Cambiar la lista quemada por valores obtenidos del backend
+  constructor(private publicService: PublicService) {
+    this.getEvents();
+    this.getTypes();
+
+    
+    
+  }
+
+  public async getEvents() {
+    this.publicService.getEventList().subscribe({
+      next: (data) => {
+        this.events = data.response;
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
+  }
+
+  public getTypes() {
+    this.publicService.getTypes().subscribe({
+      next: (data) => {
+        this.eventTypes = data.response;
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
   }
 }

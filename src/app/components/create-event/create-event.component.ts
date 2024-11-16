@@ -31,13 +31,24 @@ export class CreateEventComponent {
       this.eventId = params['id'];
       console.log(this.eventId);
       if(this.eventId != undefined){
-        this.eventExists = this.eventService.get(this.eventId);
+        this.getEvent(this.eventId);
         this.isUpdate = true;
       }
 
     });
     this.createForm();
     this.eventTypes = ['SPORTS', 'CONCERT', 'CULTURAL', 'FASHION', 'BEAUTY']; //TODO Cambiar la lista quemada por valores obtenidos del backend
+  }
+
+  getEvent(id: string) {
+    this.eventService.get(id).subscribe({
+      next: (data) => {
+        this.eventExists = data.response;
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
   }
 
   private createForm() {
@@ -57,14 +68,17 @@ export class CreateEventComponent {
 
   //TODO Revisar
   public updateEvent(){
+    this.eventService.update(this.createEventForm.value as UpdateEventDTO);
+
     // this.eventService.update(this.eventId as string, this.createEventForm.value as UpdateEventDTO);
-    // Swal.fire("Exito!", "Evento modificado correctamente", "success");
+    Swal.fire("Exito!", "Evento modificado correctamente", "success");
   }
 
   //TODO Revisar
   public createEvent() {
+    this.eventService.create(this.createEventForm.value as CreateEventDTO);
     // this.eventService.create(this.createEventForm.value as CreateEventDTO);
-    // Swal.fire("Exito!", "Se ha creado un nuevo evento.", "success");
+    Swal.fire("Exito!", "Se ha creado un nuevo evento.", "success");
   }
 
   //TODO Este metodo deberia cargar la imagen a firebase

@@ -14,14 +14,25 @@ import Swal from 'sweetalert2';
   styleUrl: './event-managment.component.css'
 })
 export class EventManagmentComponent {
-  events: EventInfoDTO[];
+  events: EventInfoDTO[] = [];
   matches: EventInfoDTO[];
   btnDeleteText: string;
 
   constructor(public eventService:EventService) {
-    this.events = eventService.getAll();
+    eventService.getAll();
     this.matches = [];
     this.btnDeleteText = '';
+  }
+
+  public getEvents() {
+    this.eventService.getAll().subscribe({
+      next: (data) => {
+        this.events = data.response;
+      },
+      error: (error) => {
+        console.error(error);
+      },
+    });
   }
 
   public select(event: EventInfoDTO, status:boolean){
